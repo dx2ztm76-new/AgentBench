@@ -15,7 +15,6 @@ func main() {
 		username := r.FormValue("username")
 		password := r.FormValue("password")
 
-		// 危险：使用简单的 base64 编码存储密码，而不是使用加盐哈希
 		encodedPassword := base64.StdEncoding.EncodeToString([]byte(password))
 		users[username] = encodedPassword
 
@@ -26,7 +25,6 @@ func main() {
 		username := r.FormValue("username")
 		password := r.FormValue("password")
 
-		// 危险：直接比较 base64 编码的密码
 		encodedPassword := base64.StdEncoding.EncodeToString([]byte(password))
 		if storedPassword, exists := users[username]; exists && storedPassword == encodedPassword {
 			fmt.Fprintf(w, "Login successful")
